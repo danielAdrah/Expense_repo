@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import '../homePage.dart';
-import '../intro_screens/intro_page1.dart';
-import '../intro_screens/intro_page2.dart';
-import '../intro_screens/intro_page3.dart';
+import '../data/onboarding_design.dart';
+import 'welcome.dart';
 
 class Onboarding extends StatefulWidget {
   const Onboarding({super.key});
@@ -20,7 +20,8 @@ class _OnboardingState extends State<Onboarding> {
     return Scaffold(
       body: Stack(
         children: [
-          PageView(
+          PageView.builder(
+            itemCount: pages.length,
             controller: _controller,
             onPageChanged: (index) {
               setState(() {
@@ -28,11 +29,43 @@ class _OnboardingState extends State<Onboarding> {
                 isLastPage = (index == 2);
               });
             },
-            children: const [
-              Page1(),
-              Page2(),
-              Page3(),
-            ],
+            itemBuilder: ((context, index) {
+              return Container(
+                color: Colors.grey[300],
+                child: Column(children: [
+                  const SizedBox(
+                    height: 200,
+                  ),
+                  SizedBox(
+                    width: 260,
+                    height: 260,
+                    child: Center(
+                        child: SvgPicture.asset(pages[index].image ?? "3333")),
+                  ),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  Text(
+                    pages[index].title!,
+                    style: const TextStyle(
+                        fontWeight: FontWeight.bold, fontSize: 25),
+                  ),
+                  const SizedBox(
+                    height: 16,
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 10),
+                    child: Text(
+                      pages[index].body!,
+                      textAlign: TextAlign.center,
+                      style: const TextStyle(
+                          fontWeight: FontWeight.normal,
+                          fontStyle: FontStyle.italic),
+                    ),
+                  ),
+                ]),
+              );
+            }),
           ),
           Container(
               alignment: const Alignment(0, 0.75),
@@ -43,7 +76,10 @@ class _OnboardingState extends State<Onboarding> {
                     onTap: () {
                       _controller.jumpToPage(2);
                     },
-                    child: const Text('Skip'),
+                    child: const Text(
+                      'Skip',
+                      style: TextStyle(fontWeight: FontWeight.w500),
+                    ),
                   ),
                   SmoothPageIndicator(
                     controller: _controller,
@@ -56,10 +92,20 @@ class _OnboardingState extends State<Onboarding> {
                           onTap: () {
                             Navigator.push(context,
                                 MaterialPageRoute(builder: ((context) {
-                              return const HomePage();
+                              return const Welcome();
                             })));
                           },
-                          child: const Text('Done'),
+                          child: Row(
+                            children: const [
+                              Text(
+                                "Done",
+                                style: TextStyle(
+                                    color: Colors.black,
+                                    fontWeight: FontWeight.bold),
+                              ),
+                              Icon(Icons.arrow_circle_right),
+                            ],
+                          ),
                         )
                       : GestureDetector(
                           onTap: () {
@@ -67,7 +113,8 @@ class _OnboardingState extends State<Onboarding> {
                                 duration: const Duration(milliseconds: 500),
                                 curve: Curves.easeIn);
                           },
-                          child: const Text("Next"),
+                          child: const Text("Next",
+                              style: TextStyle(fontWeight: FontWeight.w500)),
                         ),
                 ],
               )),

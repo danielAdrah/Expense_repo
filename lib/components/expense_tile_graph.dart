@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 
-class ExpenseTile extends StatelessWidget {
+class ExpenseTileGraph extends StatelessWidget {
   final String name;
   final String amount;
   final DateTime dateTime;
   void Function(BuildContext)? deleteTapped;
 
-  ExpenseTile({
+  ExpenseTileGraph({
     super.key,
     required this.name,
     required this.amount,
@@ -27,24 +27,10 @@ class ExpenseTile extends StatelessWidget {
           borderRadius: BorderRadius.circular(4),
         ),
       ]),
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
-        child: Container(
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(7),
-            border: Border.all(
-              width: 2,
-              color: Colors.grey,
-            ),
-            color: Colors.grey,
-          ),
-          child: ListTile(
-            title: Text(name),
-            subtitle:
-                Text('${dateTime.day}/${dateTime.month}/${dateTime.year}'),
-            trailing: Text('\$$amount'),
-          ),
-        ),
+      child: ListTile(
+        title: Text(name),
+        subtitle: Text('${dateTime.day}/${dateTime.month}/${dateTime.year}'),
+        trailing: Text('\$$amount'),
       ),
     );
   }
