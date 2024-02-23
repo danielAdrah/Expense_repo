@@ -95,16 +95,11 @@ class _OnboardingState extends State<Onboarding> {
                               return const Welcome();
                             })));
                           },
-                          child: Row(
-                            children: const [
-                              Text(
-                                "Done",
-                                style: TextStyle(
-                                    color: Colors.black,
-                                    fontWeight: FontWeight.bold),
-                              ),
-                              Icon(Icons.arrow_circle_right),
-                            ],
+                          child: const Text(
+                            "Done",
+                            style: TextStyle(
+                                color: Colors.black,
+                                fontWeight: FontWeight.bold),
                           ),
                         )
                       : GestureDetector(

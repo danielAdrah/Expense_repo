@@ -19,12 +19,12 @@ class _HomePageState extends State<HomePage> {
   final newExNameController = TextEditingController();
   final newExAmountController = TextEditingController();
 
-  // @override
-  // void initState() {
-  //   super.initState();
-  //   //prepare the data on startup
-  //   Provider.of<ExpenseData>(context, listen: false).prepareData();
-  // }
+  @override
+  void initState() {
+    super.initState();
+    //prepare the data on startup
+    Provider.of<ExpenseData>(context, listen: false).prepareData();
+  }
 
   void deleteExpense(ExpenseItem expense) {
     Provider.of<ExpenseData>(context, listen: false).deleteExpense(expense);

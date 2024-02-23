@@ -12,28 +12,28 @@ class ExpenseData extends ChangeNotifier {
   }
 
   //prepare the data to display
-  // final db = HiveDataBase();
-  // void prepareData() {
-  //   //check if there is data to display
+  final db = HiveDataBase();
+  void prepareData() {
+    //check if there is data to display
 
-  //   if (db.readData().isNotEmpty) {
-  //     // means if there was or is a data put it in the allExpenseList and it will display them
-  //     allExpenseList = db.readData();
-  //   }
-  // }
+    if (db.readData().isNotEmpty) {
+      // means if there was or is a data put it in the allExpenseList and it will display them
+      allExpenseList = db.readData();
+    }
+  }
 
   //method to add an expense to the list
   void addExpense(ExpenseItem newExpense) {
     allExpenseList.add(newExpense);
     notifyListeners();
-    //db.saveData(allExpenseList);
+    db.saveData(allExpenseList);
   }
 
   //method to delete an expense
   void deleteExpense(ExpenseItem newExpense) {
     allExpenseList.remove(newExpense);
     notifyListeners();
-    //db.saveData(allExpenseList);
+    db.saveData(allExpenseList);
   }
   
 
